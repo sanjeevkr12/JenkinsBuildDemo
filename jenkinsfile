@@ -1,33 +1,22 @@
 pipeline {
     agent any
-    stages { 
-        stage('Build') {
+    tools { 
+        maven 'Maven 3.1.0' 
+        jdk 'jdk8' 
+    }
+    stages {
+        stage ('Initialize') {
             steps {
-                echo 'invoke build'
-                bat "mvn clean"
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
             }
         }
-         stage('Test') {
+
+        stage ('Build') {
             steps {
-                echo 'invoke test'
-                bat "mvn test"
-            }
-        }
-         stage('compile') {
-            steps {
-                echo 'invoke compile'
-                bat "mvn compile"
-            }
-        }
-        stage('Install') {
-            steps {
-                echo 'invoke install'
-                bat "mvn install"
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'invoke Deploy'
+                echo 'This is a minimal pipeline.'
             }
         }
     }
